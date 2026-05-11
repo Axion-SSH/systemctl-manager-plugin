@@ -782,7 +782,7 @@
       readSettings(info);
       applySettingsToUI();
       applySession(info);
-      window.axion.window && window.axion.window.setTitle('systemctl-manager');
+      window.axion.window && window.axion.window.setTitle('Systemctl Manager');
       if ((info && info.session) || window.axion.session) {
         loadUnits();
       } else {
