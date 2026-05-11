@@ -1,0 +1,101 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>systemctl-manager</title>
+  <link rel="stylesheet" href="css/app.css" />
+</head>
+<body>
+  <div id="app" class="app">
+    <header class="app-header">
+      <div class="app-header-left">
+        <h1 class="ax-h1" id="title">systemctl</h1>
+        <span class="ax-pill" id="scope-pill">system</span>
+      </div>
+      <div class="app-header-right">
+        <span class="ax-text-muted" id="summary"></span>
+        <button class="ax-btn ax-btn-ghost ax-btn-sm" id="failed-btn" title="Show only failed units">Failed</button>
+        <button class="ax-btn ax-btn-ghost ax-btn-sm" id="daemon-reload-btn" title="systemctl daemon-reload">Daemon&nbsp;reload</button>
+        <button class="ax-btn ax-btn-primary ax-btn-sm" id="refresh-btn">Refresh</button>
+      </div>
+    </header>
+
+    <div class="toolbar">
+      <input class="ax-input" id="search" type="text" placeholder="Search by name or description…" autocomplete="off" />
+      <div id="type-select-mount"></div>
+      <div id="state-select-mount"></div>
+      <div id="scope-select-mount"></div>
+    </div>
+
+    <main class="main">
+      <aside class="list-pane" id="list-pane">
+        <div class="list-pane-empty ax-empty" id="list-empty">
+          <div class="ax-empty-title">No units</div>
+          <div class="ax-text-muted">Adjust filters or click Refresh.</div>
+        </div>
+        <ul class="unit-list" id="unit-list" hidden></ul>
+      </aside>
+
+      <section class="detail-pane" id="detail-pane">
+        <div class="ax-empty" id="detail-empty">
+          <div class="ax-empty-title">Pick a unit on the left</div>
+          <div class="ax-text-muted">Use the search and filters to narrow things down.</div>
+        </div>
+
+        <div class="detail" id="detail" hidden>
+          <div class="detail-head">
+            <div class="detail-head-text">
+              <div class="detail-name ax-h2" id="d-name">—</div>
+              <div class="detail-desc ax-text-secondary" id="d-desc"></div>
+              <div class="detail-meta">
+                <span class="ax-pill" id="d-active">—</span>
+                <span class="ax-pill" id="d-sub">—</span>
+                <span class="ax-pill" id="d-file-state">—</span>
+                <span class="ax-pill" id="d-load">—</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="action-row">
+            <button class="ax-btn ax-btn-primary ax-btn-sm" data-action="start">Start</button>
+            <button class="ax-btn ax-btn-danger  ax-btn-sm" data-action="stop">Stop</button>
+            <button class="ax-btn ax-btn-outline ax-btn-sm" data-action="restart">Restart</button>
+            <button class="ax-btn ax-btn-outline ax-btn-sm" data-action="reload">Reload</button>
+            <span class="action-spacer"></span>
+            <button class="ax-btn ax-btn-outline ax-btn-sm" data-action="enable">Enable</button>
+            <button class="ax-btn ax-btn-outline ax-btn-sm" data-action="disable">Disable</button>
+            <span class="action-spacer"></span>
+            <button class="ax-btn ax-btn-ghost ax-btn-sm" data-action="mask">Mask</button>
+            <button class="ax-btn ax-btn-ghost ax-btn-sm" data-action="unmask">Unmask</button>
+          </div>
+
+          <nav class="tabs">
+            <button class="tab active" data-tab="status">Status</button>
+            <button class="tab" data-tab="definition">Definition</button>
+            <button class="tab" data-tab="logs">Logs</button>
+            <button class="tab" data-tab="properties">Properties</button>
+          </nav>
+
+          <pre class="ax-code tab-body" id="tab-status">Loading…</pre>
+          <pre class="ax-code tab-body" id="tab-definition" hidden>Loading…</pre>
+          <div class="tab-body tab-body-logs" id="tab-logs" hidden>
+            <div class="logs-toolbar">
+              <button class="ax-btn ax-btn-ghost ax-btn-sm" id="logs-refresh">Refresh logs</button>
+              <span class="ax-text-muted" id="logs-meta"></span>
+            </div>
+            <pre class="ax-code" id="tab-logs-pre">Loading…</pre>
+          </div>
+          <pre class="ax-code tab-body" id="tab-properties" hidden>Loading…</pre>
+        </div>
+      </section>
+    </main>
+
+    <div class="status-bar">
+      <span id="status-msg" class="ax-text-muted">Ready.</span>
+      <span id="session-info" class="ax-text-muted"></span>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>

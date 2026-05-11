@@ -1,0 +1,75 @@
+{
+  "id": "systemctl-manager-plugin",
+  "name": "Systemctl Manager",
+  "version": "1.0.0",
+  "author": "Axion",
+  "description": "Browse, start, stop, restart, enable, mask and inspect systemd units without a terminal.",
+  "icon": "icon.png",
+  "presentations": {
+    "plugin": {
+      "entry": "index.html",
+      "defaultSize": { "w": 820, "h": 580 }
+    }
+  },
+  "permissions": ["ssh.exec", "ssh.sudo"],
+  "requirements": ["systemctl", "journalctl"],
+  "settings": [
+    {
+      "name": "defaultScope",
+      "title": "Default scope",
+      "type": "select",
+      "default": "system",
+      "description": "System units run as root. User units run for the logged-in user (systemctl --user).",
+      "options": [
+        { "value": "system", "label": "System (--system)" },
+        { "value": "user",   "label": "User (--user)" }
+      ]
+    },
+    {
+      "name": "defaultType",
+      "title": "Default unit type",
+      "type": "select",
+      "default": "service",
+      "options": [
+        { "value": "all",       "label": "All types" },
+        { "value": "service",   "label": "Service" },
+        { "value": "socket",    "label": "Socket" },
+        { "value": "timer",     "label": "Timer" },
+        { "value": "target",    "label": "Target" },
+        { "value": "mount",     "label": "Mount" },
+        { "value": "automount", "label": "Automount" },
+        { "value": "path",      "label": "Path" },
+        { "value": "slice",     "label": "Slice" },
+        { "value": "scope",     "label": "Scope" },
+        { "value": "swap",      "label": "Swap" },
+        { "value": "device",    "label": "Device" }
+      ]
+    },
+    {
+      "name": "journalLines",
+      "title": "Journal lines to fetch",
+      "type": "number",
+      "default": 200,
+      "min": 50,
+      "max": 5000,
+      "step": 50
+    },
+    {
+      "name": "autoRefresh",
+      "title": "Auto-refresh interval (seconds, 0 = off)",
+      "type": "number",
+      "default": 0,
+      "min": 0,
+      "max": 600,
+      "step": 5
+    },
+    {
+      "name": "useSudo",
+      "title": "Use sudo for system unit actions",
+      "type": "boolean",
+      "default": true,
+      "description": "Turn off if the remote login already has root privileges and you'd rather skip the per-action sudo password prompt."
+    }
+  ],
+  "sdk": "1"
+}
